@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"sourceMap": false,
+		"noImplicitAny": true,
+		"noImplicitUseStrict": true,
+		"module": "commonjs",
+		"target": "es5",
+		"preserveConstEnums": true
+	},
+	"exclude": [
+		"node_modules"
+	],
+	"include": [
+		"api/UserApps-API.d.ts",
+		"ServerApp/**/*.ts",
+		"main.ts"
+	]
+}

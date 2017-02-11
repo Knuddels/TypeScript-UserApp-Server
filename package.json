@@ -1,0 +1,14 @@
+{
+	"name": "AwesomeTypeScriptApp",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"build-server": "webpack --config webpack.server.js --display-error-details"
+	},
+	"devDependencies": {
+		"@types/core-js": "^0.9.35",
+		"ts-loader": "^2.0.0",
+		"typescript": "^2.1.5",
+		"webpack": "^1.14.0"
+	}
+}
