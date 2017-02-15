@@ -1,8 +1,8 @@
 # TypeScript-UserApp-Server
-In this project I will provide a npm-based setup to write the server part of a UserApp in TypeScript and compile it to JavaScript that runs on @Knuddels UserApp servers.
+In this project we will provide a npm-based setup to write the server part of a [UserApp](https://developer.knuddels.de/) in [TypeScript](https://www.typescriptlang.org/) and compile it to JavaScript that runs on our UserApp servers.
 
 # Dependencies
-Since we use NPM to manage the tools we need you have to install the newest stable version of Node.js first before you can start.
+Since we use [npm](https://www.npmjs.com/get-npm) to manage the tools we need you have to install the newest stable version of [Node.js](https://nodejs.org/) first before you can start.
 
 # How does it work?
 Just clone this repository or copy everything to the desired place on your computer. Since there is already some code for a lovely TypeScript demonstration app already in this repository, you can instantly start compiling something!
@@ -13,4 +13,7 @@ Just clone this repository or copy everything to the desired place on your compu
 - Tada!
 
 # How to test it?
-Now you just have to follow the usual deployment process (see here: https://bitbucket.org/knuddels/user-apps/wiki/DeineErsteApp).
+Now you just have to follow the usual [UserApp deployment process](https://bitbucket.org/knuddels/user-apps/wiki/DeineErsteApp).
+
+# TypeScript declaration notice
+Since we dont't have a automated process to deploy the TypeScript declaration file to NPM, you have to update it manually. You should do this every time we change something in the UserApp API. You can follow the [UserApps Changelog](https://blog.knuddels.de/changelog/).
