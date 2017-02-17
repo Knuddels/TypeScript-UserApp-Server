@@ -12,7 +12,6 @@
 	],
 	"include": [
 		"api/UserApps-API.d.ts",
-		"ServerApp/**/*.ts",
-		"main.ts"
+		"ServerApp/**/*.ts"
 	]
 }
