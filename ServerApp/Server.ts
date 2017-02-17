@@ -41,7 +41,7 @@ export class Server implements App {
 		user.sendPrivateMessage(`Hi ${user.getNick().escapeKCode()}, welcome to the Channel ${channel.getChannelName().escapeKCode()}!`)
 	}
 
-	public onPrepareShutdown?(secondsTillShutdown:number) {
+	public onPrepareShutdown(secondsTillShutdown:number) {
 		const bot:BotUser = KnuddelsServer.getDefaultBotUser();
 		bot.sendPublicMessage("Bye World, i have to go now.");
 		KnuddelsServer.getChannel().getOnlineUsers(UserType.Human).forEach((user:User) => {
