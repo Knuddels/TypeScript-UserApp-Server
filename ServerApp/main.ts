@@ -1,6 +1,5 @@
-// import {UserApp as AppInterface} from './knuddels/Knuddels'
 import {Server} from './Server';
 
-declare let App:Server;
+declare let App:Server;// tell the compiler that "App" will be available
 
 App = new Server();
