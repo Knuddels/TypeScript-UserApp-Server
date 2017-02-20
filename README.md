@@ -16,5 +16,5 @@ Just clone this repository or copy everything to the desired place on your compu
 Now you just have to follow the usual [UserApp deployment process](https://bitbucket.org/knuddels/user-apps/wiki/DeineErsteApp).
 
 # Notice: TypeScript declaration file update
-Since we dont't yet have a automated process to deploy the TypeScript declaration file to npm, you have to update it manually. You should do this every time we change something in the UserApp API. You can follow the [UserApps Changelog](https://blog.knuddels.de/changelog/).
+Since we don't yet have a automated process to deploy the TypeScript declaration file to npm yet. You have to update it manually. You should do this every time we change something in the UserApp API. You can follow the [UserApps Changelog](https://blog.knuddels.de/changelog/).
 It is referenced on our [Developer Portal](https://developer.knuddels.de/), or you can [download it here](https://developer.knuddels.de/docs/UserApps-API.d.ts).
