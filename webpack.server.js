@@ -1,15 +1,9 @@
-const webpack = require('webpack');
-
 module.exports = {
 	entry: {
 		main: './ServerApp/main.ts',
 	},
 	resolve: {
-		modulesDirectories: [
-			'node_modules',
-			'api'
-		],
-		extensions: ["", ".ts", ".tsx"]
+		extensions: [".ts", ".tsx"]
 	},
 	output: {
 		filename: 'main.js'
