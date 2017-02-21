@@ -145,7 +145,24 @@ declare interface App {
 	 * geändert hat.
 	 */
 	onAccountChangedKnuddelAmount?(user:User, knuddelAccount:KnuddelAccount, oldKnuddelAmount:KnuddelAmount, newKnuddelAmount:KnuddelAmount):void;
-	chatCommands:Object;
+	/**
+	 * Ermöglicht das Registrieren eigener Chatbefehle.
+	 * In einem Channel kann nur eine App laufen, die einen bestimmten Chatbefehl nutzt.
+	 * Versucht eine zweite App einen Chatbefehl zu registrieren, den eine andere
+	 * App bereits nutzt, so wird ein Fehler geloggt und die App startet nicht bzw. fährt herunter.
+	 *
+	 * Die Struktur eines registrierten Chatbefehls ist:
+	 * <code>commandName: function (user, params, command) {}</code>
+	 *
+	 *
+	 * <ul>
+	 * <li><code>commandName</code> ist der Name der Funktion, wie sie aufgerufen wird (beispielsweise /commandname)</li>
+	 * <li><code>user</code> ist der Nutzer, der die Funktion aufgerufen hat</li>
+	 * <li><code>params</code> sind die Parameter, die der Nutzer hinter dem Befehl eingegeben hat (beispielsweise /commandname params)</li>
+	 * <li><code>command</code> ist der Name des Befehl selbst (beispielsweise commandName)</li>
+	 * </ul>
+	 */
+	chatCommands?:{ [commandName:string]: (user:User, params:string, command:string) => void };
 }
 
 /**
@@ -465,7 +482,13 @@ declare class AppServerInfo extends ServerInfo {
  * null
  */
 declare class AppViewMode {
+	/**
+	 *
+	 */
 	public static readonly Overlay:AppViewMode;
+	/**
+	 * Zum Öffnen eines Popups durch das HTML User Interface
+	 */
 	public static readonly Popup:AppViewMode;
 }
 
@@ -682,8 +705,18 @@ declare class ChannelRights {
  * mit channel.getTalkMode()
  */
 declare class ChannelTalkMode {
+	/**
+	 * Jeder darf gerade im Channel schreiben.
+	 */
 	public static readonly Everyone:ChannelTalkMode;
+	/**
+	 * Nur Personen, die besondere Rederechte haben dürfen gerade im Channel schreiben.
+	 */
 	public static readonly OnlyWithTalkPermission:ChannelTalkMode;
+	/**
+	 * Nur Personen, die besondere Rederechte haben dürfen gerade im Channel schreiben.
+	 * Die Nachrichten aller anderen Nutzer werden gefiltert und ggf. von den Moderatoren zugelassen.
+	 */
 	public static readonly FilteredByModerators:ChannelTalkMode;
 }
 
@@ -692,11 +725,37 @@ declare class ChannelTalkMode {
  * im Channel.
  */
 declare class ChannelTalkPermission {
+	/**
+	 * Der User ist gerade nicht im Channel,
+	 * daher ist die ChannelTalkPermission nicht bekannnt.
+	 */
 	public static readonly NotInChannel:ChannelTalkPermission;
+	/**
+	 * Der User hat keine speziellen Rederechte.
+	 * Beim ChannelTalkMode Default können diese User
+	 * Nachrichten verfassen:
+	 */
 	public static readonly Default:ChannelTalkPermission;
+	/**
+	 * Der User kann eine öffentliche Nachricht verfassen. Danach wechselt die
+	 * ChannelTalkPermission automatisch auf Default.
+	 */
 	public static readonly TalkOnce:ChannelTalkPermission;
+	/**
+	 * Der User kann permanent öffentliche Nachrichten verfassen.
+	 */
 	public static readonly TalkPermanent:ChannelTalkPermission;
+	/**
+	 * Der User ist VIP und kann öffentliche Nachrichten verfassen,
+	 * die farbig und groß dargestellt werden.
+	 */
 	public static readonly VIP:ChannelTalkPermission;
+	/**
+	 * Der User ist VIP und kann öffentliche Nachrichten verfassen,
+	 * die farbig und groß dargestellt werden. Moderatoren haben zudem weitere Möglichkeiten, die in der
+	 * <a href="http://knuddels.de/doku/Moderationssystem.pdf" target="_blank">Anleitung zum Moderationssystem</a>
+	 * nachgelesen werden können.
+	 */
 	public static readonly Moderator:ChannelTalkPermission;
 }
 
@@ -791,6 +850,9 @@ declare class Client {
 	 * Diese Id kann beim Einbinden eigener Ressourcen zum selben Zweck genutzt werden.
 	 */
 	public static getCacheInvalidationId():string;
+	/**
+	 * Beinhaltet die JSON-Daten, die beim Erstellen des HTMLFile übergeben wurden.
+	 */
 	public static pageData:Object;
 }
 
@@ -882,10 +944,25 @@ declare module Client {
  * mit user.getClientType()
  */
 declare class ClientType {
+	/**
+	 * Der User ist mit dem Java Applet im Chat.
+	 */
 	public static readonly Applet:ClientType;
+	/**
+	 * Der User ist mit dem Browser im Chat (Mini-Chat, HTML-Chat).
+	 */
 	public static readonly Browser:ClientType;
+	/**
+	 * Der User ist mit der Android-App im Chat.
+	 */
 	public static readonly Android:ClientType;
+	/**
+	 * Der User ist mit der iOS-App im Chat.
+	 */
 	public static readonly IOS:ClientType;
+	/**
+	 * Der User ist nicht im Chat.
+	 */
 	public static readonly Offline:ClientType;
 }
 
@@ -1134,8 +1211,17 @@ declare class ExternalServerResponse {
  * Gender repräsentiert das Geschlecht eines User.
  */
 declare class Gender {
+	/**
+	 * Das Geschlecht ist männlich.
+	 */
 	public static readonly Male:Gender;
+	/**
+	 * Das Geschlecht ist weiblich.
+	 */
 	public static readonly Female:Gender;
+	/**
+	 * Das Geschlecht ist nicht bekannt.
+	 */
 	public static readonly Unknown:Gender;
 }
 
@@ -1314,8 +1400,17 @@ declare class KnuddelPot {
  * Repräsentiert den Status eines KnuddelPot.
  */
 declare class KnuddelPotState {
+	/**
+	 * Der KnuddelPot ist geöffnet und kann neue Teilnehmer annehmen.
+	 */
 	public static readonly Open:KnuddelPotState;
+	/**
+	 * Der KnuddelPot ist versiegelt und kann keine neuen Teilnehmer annehmen.
+	 */
 	public static readonly Sealed:KnuddelPotState;
+	/**
+	 * Der KnuddelPot ist beendet und die Knuddel bereits ausgezahlt.
+	 */
 	public static readonly Closed:KnuddelPotState;
 }
 
@@ -1401,8 +1496,17 @@ declare class KnuddelTransfer {
  * KnuddelTransferDisplayType repräsentiert die Art der Darstellung einer Knuddel-Überweisung.
  */
 declare class KnuddelTransferDisplayType {
+	/**
+	 * Nachricht wird öffentlich angezeigt.
+	 */
 	public static readonly Public:KnuddelTransferDisplayType;
+	/**
+	 * Nachricht wird privat angezeigt.
+	 */
 	public static readonly Private:KnuddelTransferDisplayType;
+	/**
+	 * Nachricht wird als /m zugestellt.
+	 */
 	public static readonly Post:KnuddelTransferDisplayType;
 }
 
@@ -2056,9 +2160,21 @@ declare class ToplistAccess {
  * ToplistDisplayType repräsentiert den Anzeigetyp eines Toplisteneintrags im Profil vonUsern.
  */
 declare class ToplistDisplayType {
+	/**
+	 * Nur Anzeigename anzeigen.
+	 */
 	public static readonly Label:ToplistDisplayType;
+	/**
+	 * Gespeicherten Wert anzeigen.
+	 */
 	public static readonly Value:ToplistDisplayType;
+	/**
+	 * Anzeigename und Rang anzeigen.
+	 */
 	public static readonly LabelAndRank:ToplistDisplayType;
+	/**
+	 * Wert und Rang anzeigen.
+	 */
 	public static readonly ValueAndRank:ToplistDisplayType;
 }
 
@@ -2568,12 +2684,33 @@ declare class UserStatus {
 	 * Liefert die Information ob der aktuelle UserStatus mindestens so hoch ist, wie der übergebene UserStatus.
 	 */
 	public isAtLeast(otherUserStatus:UserStatus):boolean;
+	/**
+	 *
+	 */
 	public static readonly Newbie:UserStatus;
+	/**
+	 *
+	 */
 	public static readonly Family:UserStatus;
+	/**
+	 *
+	 */
 	public static readonly Stammi:UserStatus;
+	/**
+	 *
+	 */
 	public static readonly HonoryMember:UserStatus;
+	/**
+	 *
+	 */
 	public static readonly Admin:UserStatus;
+	/**
+	 *
+	 */
 	public static readonly SystemBot:UserStatus;
+	/**
+	 *
+	 */
 	public static readonly Sysadmin:UserStatus;
 }
 
@@ -2581,8 +2718,17 @@ declare class UserStatus {
  * Repräsentiert den Typ eines User.
  */
 declare class UserType {
+	/**
+	 * Bot der App.
+	 */
 	public static readonly AppBot:UserType;
+	/**
+	 * Bot des Knuddels-Chatsystems.
+	 */
 	public static readonly SystemBot:UserType;
+	/**
+	 * Menschlicher User.
+	 */
 	public static readonly Human:UserType;
 }
 
