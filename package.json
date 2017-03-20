@@ -3,12 +3,12 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"build-server": "webpack --config webpack.server.js --display-error-details"
+		"build": "webpack --config webpack.config.js --display-error-details"
 	},
 	"devDependencies": {
-		"@types/core-js": "^0.9.35",
+		"@types/knuddels-userapps-api": "^1.0.0",
 		"ts-loader": "^2.0.0",
-		"typescript": "^2.1.5",
+		"typescript": "^2.2.1",
 		"webpack": "^2.2.1"
 	}
 }
